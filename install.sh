@@ -26,7 +26,7 @@ cd "$ROS2_WORKSPACE_PATH" || { echo "Error: Could not change to workspace root d
 
 # 2. Build the custom message package
 echo "Building package: $PACKAGE_NAME"
-sudo colcon build --packages-select "$PACKAGE_NAME" || { echo "Error: colcon build failed. Please check the build output. Exiting."; exit 1; }
+sudo bash -c "source /opt/ros/humble/setup.bash && colcon build --packages-select \"$PACKAGE_NAME\"" || { echo "Error: colcon build failed. Please check the build output. Exiting."; exit 1; }
 echo "Package build complete."
 
 # 3. Add sourcing to shell RC file (e.g., ~/.bashrc)
@@ -49,6 +49,6 @@ fi
 
 echo "--- Setup Complete ---"
 echo "Please restart your terminal or run 'source $SHELL_RC_FILE' for changes to take effect."
-echo "You can now verify by opening a new terminal and checking 'ros2 interface show $PACKAGE_NAME/MyCustomMessage'."
+echo "You can now verify by opening a new terminal and checking 'ros2 interface show $PACKAGE_NAME/msg/CSI'."
 
 source $SHELL_RC_FILE
