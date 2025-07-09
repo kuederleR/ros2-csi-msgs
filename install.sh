@@ -2,14 +2,14 @@
 # --- Configuration ---
 ROS2_WORKSPACE_PATH="/opt/ros2-csi-msgs"
 PACKAGE_NAME="wifi_msgs"
-ROS2_INSTALL_PATH="/opt/ros/humble" # Adjust this if your ROS2 install path is different
+ROS2_INSTALL_PATH="/opt/ros/$ROS_DISTRO" # Adjust this if your ROS2 install path is different
 USER=$(whoami)
 USER_HOME="$HOME"
 SHELL_RC_FILE="$USER_HOME/.bashrc"
 GITHUB_REPO_URL="https://github.com/kuederleR/ros2-csi-msgs.git"
 
 echo "--- Starting ROS2 Environment Setup Script ---"
-source /opt/ros/humble/setup.bash || { echo "Error: Could not source ROS2 setup.bash. Please ensure ROS2 is installed correctly. Exiting."; exit 1; }
+source /opt/ros/$ROS_DISTRO/setup.bash || { echo "Error: Could not source ROS2 setup.bash. Please ensure ROS2 is installed correctly. Exiting."; exit 1; }
 
 cd "/opt" || { echo "Error: Could not change to /opt directory. Exiting."; exit 1; }
 # 1. Clone the custom message package if it doesn't exist
@@ -26,7 +26,7 @@ cd "$ROS2_WORKSPACE_PATH" || { echo "Error: Could not change to workspace root d
 
 # 2. Build the custom message package
 echo "Building package: $PACKAGE_NAME"
-sudo bash -c "source /opt/ros/humble/setup.bash && colcon build --packages-select \"$PACKAGE_NAME\"" || { echo "Error: colcon build failed. Please check the build output. Exiting."; exit 1; }
+sudo bash -c "source /opt/ros/$ROS_DISTRO/setup.bash && colcon build --packages-select \"$PACKAGE_NAME\"" || { echo "Error: colcon build failed. Please check the build output. Exiting."; exit 1; }
 echo "Package build complete."
 
 # 3. Add sourcing to shell RC file (e.g., ~/.bashrc)
