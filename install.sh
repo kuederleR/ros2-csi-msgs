@@ -9,6 +9,7 @@ SHELL_RC_FILE="$USER_HOME/.bashrc"
 GITHUB_REPO_URL="https://github.com/kuederleR/ros2-csi-msgs.git"
 
 echo "--- Starting ROS2 Environment Setup Script ---"
+source /opt/ros/humble/setup.bash || { echo "Error: Could not source ROS2 setup.bash. Please ensure ROS2 is installed correctly. Exiting."; exit 1; }
 
 cd "/opt" || { echo "Error: Could not change to /opt directory. Exiting."; exit 1; }
 # 1. Clone the custom message package if it doesn't exist
